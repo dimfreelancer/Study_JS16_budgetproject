@@ -1,17 +1,29 @@
 'use strict';
 /**
- * Урок 1 
+ * Урок 2
  * проект Budget GLO Academy
  */
 
-let money, 
-	income,
-	addExpenses,
-	deposit,
-	mission,
-    period;
+let money = 57000,  //Доход за месяц
+	income = 'Фриланс',  //дополнительный доход
+	addExpenses = 'Интернет, Такси, Коммуналка',  //дополнительные расходы
+	deposit = true,
+	mission = 30000,
+    period = 12; //число месяцев
 
-alert('Hello this alert');
+console.log(typeof money);
+console.log(typeof income);
+console.log(typeof deposit);
 
-console.log('Hello this is console log');
+console.log(addExpenses.length);
+
+console.log('Период равен', period, 'месяцев');
+console.log('Цель заработать', mission, 'рублей/долларов/гривен/юани');
+
+console.dir(addExpenses.toLowerCase().slice(', '));
+
+
+let budgetDay = Math.floor(money / 30);  //
+console.log('budgetDay: ', budgetDay);
+
 
