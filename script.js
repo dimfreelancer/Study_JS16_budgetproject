@@ -11,6 +11,8 @@ let money = prompt('Ваш месячный доход', 57000),
     mission = 30000,
     period = 12; //число месяцев
 
+let expenses1, expenses2;
+let amount1, amount2;
 
 
 console.log(typeof money);
