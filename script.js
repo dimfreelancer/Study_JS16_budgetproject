@@ -54,8 +54,15 @@ function getExpensesMonth() {
     for (let i = 0; i < 3; i++) {
     
         expenses[i] = prompt('Введите обязательную статью расходов', 'Детский садик'); 
-        sum += +prompt('Во сколько это обойдется?', 1200);
 
+        let answer;
+        //проверка на введение число
+        do {
+            answer = prompt('Во сколько это обойдется?');
+        } while (!isNumber(answer));
+        sum += +answer;
+        
+    //     sum += +prompt('Во сколько это обойдется?');
     //     //TODO переделать на ввод данных в массив expenses[]
     //     if ( i === 0 ) {
     //         expenses1 = prompt('Введите обязательную статью расходов', 'Детский садик');
