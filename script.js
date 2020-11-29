@@ -6,8 +6,8 @@
 
 let money = '',
     income = 'Фриланс, подработка, частные проекты',  //дополнительный доход
-    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую',
-                        'Квартплата, Проездной, Кредит, Интернет, Такси, Коммуналка'),  //дополнительные расходы
+    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запяту:',
+                        'Квартплата, Проездной, Кредит, Интернет'),  //дополнительные расходы
     deposit = confirm('Есть ли у вас депозит в банке?', true),
     mission = 30000,
     period = 12; //число месяцев
@@ -20,16 +20,17 @@ let accumulatedMonth,
     budgetMonth,
     expensesMonth;
 
+
 //функция проверки на число
 function isNumber(item) {
-    return !isNaN(item) && isFinite(item);
+    return (!isNaN(parseFloat(item)) && isFinite(item));
 }
         
 //функция ввода и проверки данных
 function start() {
     do {
         money = prompt('Введите ваш месячный доход');
-    } while (!isNumber(money))
+    } while (!isNumber(money)); //просим ввести число пока пользователь не введет число
 }
 
 start();
@@ -54,20 +55,12 @@ function getExpensesMonth() {
         //TODO переделать на ввод данных в массив expenses[]
         if ( i === 0 ) {
             expenses1 = prompt('Введите обязательную статью расходов', 'Детский садик');
-            sum += +prompt('Во сколько это обойдется?', 22500);
+            sum += +prompt('Во сколько это обойдется?', 1200);
         } else if ( i === 1 ) {
             expenses2 = prompt('Введите обязательную статью расходов', 'Курсы повышения');
-            sum += +prompt('Во сколько это обойдется?', 13000);
+            sum += +prompt('Во сколько это обойдется?', 1300);
         }
     }
-
-    // amoun = expensesAmount1 + expensesAmount2;
-    // expenses1 = prompt('Введите обязательную статью расходов', 'Детский садик');
-    // expensesAmount1 = +prompt('Во сколько это обойдется?', 22500);
-    // expenses2 = prompt('Введите обязательную статью расходов', 'Курсы повышения');
-    // expensesAmount2 = +prompt('Во сколько это обойдется?', 13000);
-    // expensesAmount = expensesAmount1 + expensesAmount2;
-
     console.log('sum: ', sum);
     return expensesAmount = sum;
 }    
@@ -75,7 +68,7 @@ function getExpensesMonth() {
 function getAccumulatedMonth() {
     //Функция возвращает Накопления за месяц (Доходы минус расходы)
     // return money - (expensesAmount1 + expensesAmount2);
-    return money - expensesMonth;
+    return (money - expensesMonth);
 }    
 
 function getTargetMonth() {
@@ -112,6 +105,8 @@ function getStatusIncome() {
     }    
 }    
 
+
+expensesMonth = getExpensesMonth();
 
 console.log(`Период равен ${period} месяца`);
 console.log(`Цель заработать ${mission} рублей/долларов/гривен/юанив`);
