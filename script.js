@@ -4,6 +4,23 @@
  * проект Budget GLO Academy
  */ 
 
+//функция проверки на число
+function isNumber(item) {
+    return (!isNaN(parseFloat(item)) && isFinite(item));
+}
+        
+//функция ввода и проверки данных
+function start() {
+    do {
+        money = prompt('Введите ваш месячный доход');
+    } while (isNaN(money) || money.trim === '' || money === null);
+}
+
+//функция показывает тип данных
+function showTypeOf(data) {
+    console.log(data, typeof data);
+}
+
 let money = '',
     income = 'Фриланс, подработка, частные проекты',  //дополнительный доход
     addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запяту:',
@@ -21,23 +38,8 @@ let accumulatedMonth,
     expensesMonth;
 
 
-//функция проверки на число
-function isNumber(item) {
-    return (!isNaN(parseFloat(item)) && isFinite(item));
-}
-        
-//функция ввода и проверки данных
-function start() {
-    do {
-        money = prompt('Введите ваш месячный доход');
-    } while (isNaN(money) || money.trim === '' || money === null);
-}
 start();
 
-//функция показывает тип данных
-function showTypeOf(data) {
-    console.log(data, typeof data);
-}
 
 showTypeOf(money);
 showTypeOf(income);
