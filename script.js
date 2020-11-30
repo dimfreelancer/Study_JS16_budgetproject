@@ -15,7 +15,8 @@ let money = '',
         do {
             money = prompt('Введите ваш месячный доход');
         } 
-        while (isNaN(money) || money.trim === '' || money === null);
+        // while (isNaN(money) || money.trim === '' || money === null);
+        while (!isNumber(money));
     };
 
 start();
@@ -45,15 +46,18 @@ let appData = {
 
         if (confirm('Есть ли у вас дополнительный заработок?')) {
             let itemIncome = prompt('Какой у вас есть дополнительный заработок', 'Таксист');
-            let cashIncome = prompt('Сколько в месяц вы дополнительно зарабатываете на этом', 10000);
+            let cashIncome;
+            do {
+                cashIncome = prompt('Сколько в месяц вы дополнительно зарабатываете на этом', 10000);
+            }
+            while(!isNumber(cashIncome));
             //
             appData.income[itemIncome] = cashIncome;
         }
 
         let addExpenses = prompt('Перечислите возможные дополнительные расходы через запятую:');
         appData.addExpenses = addExpenses.toLowerCase().split(', '); //сплитим и сохраняем строку в массив
-        appData.deposit = confirm('Есть ли у вас депозит в банке?');
-
+        
         for (let i = 0; i < 2; i++) {
             let key = prompt('Введите обязательную статью расходов');
             let value;
@@ -63,7 +67,8 @@ let appData = {
             while (!isNumber(value));
 
             appData.expenses[key] = value; //сохраняем в объект
-        }
+        };
+        appData.deposit = confirm('Есть ли у вас депозит в банке?');
     },
     getExpensesMonth: function () {
         let sum = 0;
@@ -94,8 +99,17 @@ let appData = {
     },
     getInfoDeposit: function() {
         if(appData.deposit){
-            appData.percentDeposit = prompt('Каков процент депозита?', 10);
-            appData.moneyDeposit = prompt('Какую сумму вы вложили?', 10000);
+            // проверяем правильность ввода цифры на процент депозита
+            do {
+                appData.percentDeposit = prompt('Каков процент депозита?', 10);
+            } 
+            while (!isNumber(appData.percentDeposit));
+
+            // проверяем правильность ввода цифры на сумму залога
+            do {
+                appData.moneyDeposit = prompt('Какую сумму залога вы вложили?', 10000);
+            }
+            while (!isNumber(appData.moneyDeposit));
         }
     },
     calcSavedMoney: function() {
