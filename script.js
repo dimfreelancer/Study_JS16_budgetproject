@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Урок 7
+ * Урок 8
  * проект Budget GLO Academy
  */ 
 
@@ -38,13 +38,11 @@ let appData = {
     deposit: false,
     mission: 50000,
     period: 3,
-    // accumulatedMonth: 0,
     asking: function() { 
         let addExpenses = prompt('Перечислите возможные дополнительные расходы через запятую:');
         appData.addExpenses = addExpenses.toLowerCase().split(', '); //сплитим и сохраняем строку в массив
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
-        //обязательные расходы на месяц
         for (let i = 0; i < 2; i++) {
             let key = prompt('Введите обязательную статью расходов');
             let value;
@@ -90,16 +88,10 @@ appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
 
-// appData.expensesMonth = appData.getExpensesMonth();
-// appData.accumulatedMonth = appData.getBudget(); //расчет накоплений за месяц
-// appData.budgetDay = Math.floor(appData.accumulatedMonth / 30); //расчёт бюджет на день
-
-
+///Расходы за месяц
 console.log('Расходы за месяц', appData.expensesMonth);
-console.log('Бюджет на день budgetDay: ', appData.budgetDay);
-console.log('Бюджет на месяц accumulatedMonth: ',  appData.budgetMonth);
 
-
+//За какой период будет достигнута цель (в месяцах)
 appData.period = appData.getTargetMonth();
 if (appData.period < 0) {
     console.log('К сожалению, цель не будет достигнута');
@@ -107,12 +99,8 @@ if (appData.period < 0) {
     console.log('Цель будет достигнута в течении ' + appData.period + ' месяцев');
 }
 
-// console.log(`Период равен ${appData.period} месяца`);
-// console.log(`Цель заработать ${appData.mission} рублей/долларов/гривен/юанив`);
-
 //вывести уровень доходов
 console.log(appData.getStatusIncome());
-
 
 //вывести в консоль весь объект
 for (let key in appData) {
