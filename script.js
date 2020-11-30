@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Урок 5
+ * Урок 7
  * проект Budget GLO Academy
  */ 
 
@@ -8,76 +8,69 @@
 const isNumber = function(item) {
     return (!isNaN(parseFloat(item)) && isFinite(item));
 };
-        
-let money = '';
-const start = function() {
+
+let money = '',
+    start = function() {
     //функция ввода и проверки данных
         do {
             money = prompt('Введите ваш месячный доход');
-        } while (isNaN(money) || money.trim === '' || money === null);
-};
+        } 
+        while (isNaN(money) || money.trim === '' || money === null);
+    };
 
 start();
 
 
 //объявление рабочего объекта приложения
 let appData = {   
+
     budget: money, 
     budgetDay: 0,
     budgetMonth: 0,
 
-    expensesMonth: 0,
-    expenses: {},  //создаем пустой массив для обязательных расходов в месяц
-    // expenses: {
-    //     “ответ на первый вопрос” : “ответ на второй вопрос”,
-    //     “ответ на первый вопрос” : “ответ на второй вопрос”
-    // }
-    addExpenses: [],
-
     income: {},
     addIncome: [],
+
+    expenses: {},  
+    addExpenses: [],
+    expensesMonth: 0,
 
     deposit: false,
     mission: 50000,
     period: 3,
-
-    accumulatedMonth: 0,
+    // accumulatedMonth: 0,
     asking: function() { 
-        //дополнительные расходы addExpenses
-        let addExpenses = prompt('Перечислите возможные дополнительные расходы');
-        appData.addExpenses = addExpenses.toLowerCase().split(', '); //сохраняем массив
-        //депози
+        let addExpenses = prompt('Перечислите возможные дополнительные расходы через запятую:');
+        appData.addExpenses = addExpenses.toLowerCase().split(', '); //сплитим и сохраняем строку в массив
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
         //обязательные расходы на месяц
-        let key = '';
         for (let i = 0; i < 2; i++) {
-            key = prompt('Введите обязательную статью расходов'); 
+            let key = prompt('Введите обязательную статью расходов');
             let value;
             do {
-                value = prompt('Во сколько это обойдется?');
-            } while (!isNumber(value));
+                value = prompt('Во сколько это обойдется?', 2500);
+            }
+            while (!isNumber(value));
 
-            appData.expenses[key] = value;
+            appData.expenses[key] = value; //сохраняем в объект
         }
     },
     getExpensesMonth: function () {
         let sum = 0;
-
         for (let key in appData.expenses) {
-            sum += appData.expenses[key];
+            sum += +appData.expenses[key];
         }
-
         //сохраняем сумму обязательных расходов за месяц
         appData.expensesMonth = sum;
-
         return sum;
     },
     getBudget: function () {
-        return (appData.budget - appData.expensesMonth);
+        appData.budgetMonth = appData.budget - appData.expensesMonth;
+        appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },   
     getTargetMonth: function () {
-        return Math.ceil(appData.mission / appData.accumulatedMonth);   
+        return Math.ceil(appData.mission / appData.budgetMonth);   
     },    
     getStatusIncome: function () {
         if (appData.budgetDay > 1200) {
@@ -94,20 +87,17 @@ let appData = {
     
 
 appData.asking();
-  
+appData.getExpensesMonth();
+appData.getBudget();
+
+// appData.expensesMonth = appData.getExpensesMonth();
+// appData.accumulatedMonth = appData.getBudget(); //расчет накоплений за месяц
+// appData.budgetDay = Math.floor(appData.accumulatedMonth / 30); //расчёт бюджет на день
 
 
-console.log(`Период равен ${appData.period} месяца`);
-console.log(`Цель заработать ${appData.mission} рублей/долларов/гривен/юанив`);
-
-appData.expensesMonth = appData.getExpensesMonth();
 console.log('Расходы за месяц', appData.expensesMonth);
-
-appData.accumulatedMonth = appData.getBudget(); //расчет накоплений за месяц
-console.log('Бюджет на месяц accumulatedMonth: ',  appData.accumulatedMonth);
-
-appData.budgetDay = Math.floor(appData.accumulatedMonth / 30); //расчёт бюджет на день
 console.log('Бюджет на день budgetDay: ', appData.budgetDay);
+console.log('Бюджет на месяц accumulatedMonth: ',  appData.budgetMonth);
 
 
 appData.period = appData.getTargetMonth();
@@ -117,12 +107,14 @@ if (appData.period < 0) {
     console.log('Цель будет достигнута в течении ' + appData.period + ' месяцев');
 }
 
+// console.log(`Период равен ${appData.period} месяца`);
+// console.log(`Цель заработать ${appData.mission} рублей/долларов/гривен/юанив`);
+
+//вывести уровень доходов
 console.log(appData.getStatusIncome());
 
 
-
 //вывести в консоль весь объект
-console.log('Наша программа включает в себя данные:');
 for (let key in appData) {
-    console.log(`${key} - ${appData[key]}`);
-};
+    console.log(`Наша программа включает в себя дарнные: ${key} - ${appData[key]}`);
+}
