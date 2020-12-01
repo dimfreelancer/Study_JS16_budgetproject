@@ -23,16 +23,16 @@ start();
 
 
 //объявление рабочего объекта приложения
-let appData = {   
+let appData = {
 
-    budget: money, 
+    budget: money,
     budgetDay: 0,
     budgetMonth: 0,
 
-    income: {}, //обкт дополнительного заработка
-    addIncome: [],
+    income: {}, //обкт статей заработка
+    addIncome: [], //массив дополнительного заработка
 
-    expenses: {},  
+    expenses: {},
     addExpenses: [],
     expensesMonth: 0,
 
@@ -42,13 +42,13 @@ let appData = {
 
     mission: 50000,
     period: 3,
-    asking: function() { 
+    asking: function() {
 
         if (confirm('Есть ли у вас дополнительный заработок?')) {
-            let itemIncome = prompt('Какой у вас есть дополнительный заработок', 'Таксист');
+            let itemIncome = prompt('Какой у вас есть заработок', 'Таксист');
             let cashIncome;
             do {
-                cashIncome = prompt('Сколько в месяц вы дополнительно зарабатываете на этом', 10000);
+                cashIncome = prompt('Сколько в месяц вы зарабатываете на этом', 10000);
             }
             while(!isNumber(cashIncome));
             //
@@ -77,7 +77,6 @@ let appData = {
         }
         //сохраняем сумму обязательных расходов за месяц
         appData.expensesMonth = sum;
-        return sum;
     },
     getBudget: function () {
         appData.budgetMonth = appData.budget - appData.expensesMonth;
@@ -138,10 +137,10 @@ console.log(appData.getStatusIncome());
 
 //вывести в консоль весь объект
 for (let key in appData) {
-    console.log(`Наша программа включает в себя дарнные: ${key} - ${appData[key]}`);
+    console.log(`Наша программа включает в себя дарнные: ${key} = ${appData[key]}`);
 }
 
-//////////
-appData.getInfoDeposit();
-console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
+////////////////////////////////
+// appData.getInfoDeposit();
+// console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
 
