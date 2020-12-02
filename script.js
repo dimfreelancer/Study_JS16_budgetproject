@@ -4,20 +4,19 @@
  * проект Budget GLO Academy
  */ 
 
-//функция проверки на число
 const isNumber = function(item) {
     return (!isNaN(parseFloat(item)) && isFinite(item));
 };
 
-let money = '',
-    start = function() {
+let money = '';
+    
+const start = function() {
     //функция ввода и проверки данных
         do {
             money = prompt('Введите ваш месячный доход');
         } 
-        // while (isNaN(money) || money.trim === '' || money === null);
         while (!isNumber(money));
-    };
+};
 
 start();
 
@@ -32,8 +31,8 @@ let appData = {
     income: {}, //обкт статей заработка
     addIncome: [], //массив дополнительного заработка
 
-    expenses: {},
-    addExpenses: [],
+    expenses: {}, //обкт статей расходов
+    addExpenses: [], //массив дополнительных расходов
     expensesMonth: 0,
 
     deposit: false,
@@ -57,6 +56,16 @@ let appData = {
 
         let addExpenses = prompt('Перечислите возможные дополнительные расходы через запятую:');
         appData.addExpenses = addExpenses.toLowerCase().split(', '); //сплитим и сохраняем строку в массив
+        
+        /**TODO
+         */
+        console.log('appData.addExpenses: ', appData.addExpenses);
+        for (let key in appData.addExpenses) {
+            console.log('key = ' + key + ' => val = ' + appData.addExpenses[key]);
+        }
+
+
+
         
         for (let i = 0; i < 2; i++) {
             let key = prompt('Введите обязательную статью расходов');
@@ -136,9 +145,13 @@ if (appData.period < 0) {
 console.log(appData.getStatusIncome());
 
 //вывести в консоль весь объект
+/**
 for (let key in appData) {
     console.log(`Наша программа включает в себя дарнные: ${key} = ${appData[key]}`);
 }
+*/
+
+console.log('addExpenses', appData.addExpenses);
 
 ////////////////////////////////
 // appData.getInfoDeposit();
