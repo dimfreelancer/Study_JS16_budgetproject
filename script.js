@@ -43,17 +43,20 @@ let appData = {
     period: 3,
     asking: function() {
         //функция опроса пользователя
+
+        /** ДОХОДЫ */
         if (confirm('Есть ли у вас дополнительный заработок?')) {
             // если у пользователя есть дополнительный заработок
-            let itemIncome;
-            let cashIncome;
+            
+            let itemIncome, cashIncome;
             do {
-                itemIncome = prompt('Какой у вас есть заработок', 'Таксист');
+                itemIncome = prompt('Какой у вас есть дополнительный заработок', 'Таксист'); //key string
                 // console.log('debug itemIncome: ', itemIncome);
             }
             while(!isNaN(itemIncome)); //такая проверка на правильность ввода строки здесь работет
+
             do {
-                cashIncome = prompt('Сколько в месяц вы зарабатываете на этом', 10000);
+                cashIncome = prompt('Сколько в месяц вы зарабатываете на этом', 10000); //value number
                 // console.log('debug cashIncome: ', cashIncome);
             }
             while(!isNumber(cashIncome));
@@ -68,25 +71,31 @@ let appData = {
             appData.addExpenses[key] = appData.addExpenses[key].trim();
         }
 
+
+        /** РАСХОДЫ  expenses itemExpenses: cashExpenses*/
         for (let i = 0; i < 2; i++) {
             /** TODO потом перебрать весь массив на ввод совпадающего ключа */
             /** TODO проверка ввода строки */
-            let key;
+            let key; //itemExpenses
             do {
-                key = prompt('debug Введите обязательную статью расходов');
+                key = prompt('Введите обязательную статью расходов'); //itemExpenses
                 key = key.trim();
-                console.log('debug key: ', key);
+                // console.log('debug key: ', key);
             }
             while (!isNaN(key)); //проверка ключем не должно быть число 
-            let value;
+            
+            let value; //cashExpenses
             do {
-                value = prompt('Во сколько это обойдется?', 2500);
+                value = prompt('Во сколько это обойдется?', 2500);  //cashExpenses
             }
             while (!isNumber(value));
 
-            appData.expenses[key] = value; //сохраняем в объект
-            console.log('debug appData.expenses: ', appData.expenses);
+            let itemExpenses = key,
+                cashExpenses = value;
+            // appData.expenses[key] = value; //сохраняем в объект
+            appData.expenses[itemExpenses] = cashExpenses;
         };
+        
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
     },
     getExpensesMonth: function () {
@@ -119,7 +128,7 @@ let appData = {
         if(appData.deposit){
             // проверяем правильность ввода цифры на процент депозита
             do {
-                appData.percentDeposit = prompt('Каков процент депозита?', 10);
+                appData.percentDeposit = prompt('Какой годовой процент депозита?', 10);
             } 
             while (!isNumber(appData.percentDeposit));
 
