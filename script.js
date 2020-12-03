@@ -42,13 +42,13 @@ let appData = {
     mission: 50000,
     period: 3,
     asking: function() {
-
+        //функция опроса пользователя
         if (confirm('Есть ли у вас дополнительный заработок?')) {
-
+            // если у пользователя есть дополнительный заработок
             let itemIncome;
             let cashIncome;
             do {
-                itemIncome = prompt('DEBUG Какой у вас есть заработок', 'Таксист');
+                itemIncome = prompt('Какой у вас есть заработок', 'Таксист');
                 // console.log('debug itemIncome: ', itemIncome);
             }
             while(!isNaN(itemIncome)); //такая проверка на правильность ввода строки здесь работет
@@ -57,7 +57,6 @@ let appData = {
                 // console.log('debug cashIncome: ', cashIncome);
             }
             while(!isNumber(cashIncome));
-            //
             appData.income[itemIncome] = cashIncome;
         }
 
@@ -69,25 +68,16 @@ let appData = {
             appData.addExpenses[key] = appData.addExpenses[key].trim();
         }
 
-        // console.log('appData.addExpenses: ', appData.addExpenses);
-        // Опять собираем массив в строку
-
-        /**
-        let result = '';
-        for (let key in appData.addExpenses) {
-
-            let value = appData.addExpenses[key].trim();
-            // result += appData.addExpenses[key][0].toUpperCase() + appData.addExpenses[key].slice(1) + ', ';
-            result += value[0].toUpperCase() + value.slice(1) + ', '
-        };
-        console.log('result: ', result);
-         */
-
-
-        
         for (let i = 0; i < 2; i++) {
+            /** TODO потом перебрать весь массив на ввод совпадающего ключа */
             /** TODO проверка ввода строки */
-            let key = prompt('Введите обязательную статью расходов');
+            let key;
+            do {
+                key = prompt('debug Введите обязательную статью расходов');
+                key = key.trim();
+                console.log('debug key: ', key);
+            }
+            while (!isNaN(key)); //проверка ключем не должно быть число 
             let value;
             do {
                 value = prompt('Во сколько это обойдется?', 2500);
@@ -95,6 +85,7 @@ let appData = {
             while (!isNumber(value));
 
             appData.expenses[key] = value; //сохраняем в объект
+            console.log('debug appData.expenses: ', appData.expenses);
         };
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
     },
@@ -164,16 +155,14 @@ if (appData.period < 0) {
 console.log(appData.getStatusIncome());
 
 //вывести в консоль весь объект
-/** TODO
+/** TODO */
 for (let key in appData) {
     console.log(`Наша программа включает в себя дарнные: ${key} = ${appData[key]}`);
 }
-*/
 
 
 /** TODO */
-// appData.getInfoDeposit();
-
+appData.getInfoDeposit();
 
 //2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с большой буквы
 // слова разделены запятой и пробелом
