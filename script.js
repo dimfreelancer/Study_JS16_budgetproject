@@ -56,14 +56,25 @@ let appData = {
 
         let addExpenses = prompt('Перечислите возможные дополнительные расходы через запятую:');
         appData.addExpenses = addExpenses.toLowerCase().split(', '); //сплитим и сохраняем строку в массив
-        
-        /**TODO
-         */
-        console.log('appData.addExpenses: ', appData.addExpenses);
+
+        /** TODO перебор массива избавимся от лишних пробелов, возможно здесь лучше использовать Map()*/
         for (let key in appData.addExpenses) {
-            console.log('key = ' + key + ' => val = ' + appData.addExpenses[key]);
+            appData.addExpenses[key] = appData.addExpenses[key].trim();
         }
 
+        // console.log('appData.addExpenses: ', appData.addExpenses);
+        // Опять собираем массив в строку
+
+        /**
+        let result = '';
+        for (let key in appData.addExpenses) {
+
+            let value = appData.addExpenses[key].trim();
+            // result += appData.addExpenses[key][0].toUpperCase() + appData.addExpenses[key].slice(1) + ', ';
+            result += value[0].toUpperCase() + value.slice(1) + ', '
+        };
+        console.log('result: ', result);
+         */
 
 
         
@@ -151,9 +162,22 @@ for (let key in appData) {
 }
 */
 
-console.log('addExpenses', appData.addExpenses);
+// console.log('addExpenses', appData.addExpenses);
 
 ////////////////////////////////
+/** TODO */
 // appData.getInfoDeposit();
 // console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
+
+
+//2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с большой буквы
+// слова разделены запятой и пробелом
+let result = '';
+for (let key in appData.addExpenses) {
+
+    let value = appData.addExpenses[key].trim();
+    // result += appData.addExpenses[key][0].toUpperCase() + appData.addExpenses[key].slice(1) + ', ';
+    result += value[0].toUpperCase() + value.slice(1) + ', '
+};
+console.log('result: ', result);
 
