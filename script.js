@@ -44,10 +44,17 @@ let appData = {
     asking: function() {
 
         if (confirm('Есть ли у вас дополнительный заработок?')) {
-            let itemIncome = prompt('Какой у вас есть заработок', 'Таксист');
+
+            let itemIncome;
             let cashIncome;
             do {
+                itemIncome = prompt('DEBUG Какой у вас есть заработок', 'Таксист');
+                // console.log('debug itemIncome: ', itemIncome);
+            }
+            while(!isNaN(itemIncome)); //такая проверка на правильность ввода строки здесь работет
+            do {
                 cashIncome = prompt('Сколько в месяц вы зарабатываете на этом', 10000);
+                // console.log('debug cashIncome: ', cashIncome);
             }
             while(!isNumber(cashIncome));
             //
@@ -79,6 +86,7 @@ let appData = {
 
         
         for (let i = 0; i < 2; i++) {
+            /** TODO проверка ввода строки */
             let key = prompt('Введите обязательную статью расходов');
             let value;
             do {
@@ -156,18 +164,15 @@ if (appData.period < 0) {
 console.log(appData.getStatusIncome());
 
 //вывести в консоль весь объект
-/**
+/** TODO
 for (let key in appData) {
     console.log(`Наша программа включает в себя дарнные: ${key} = ${appData[key]}`);
 }
 */
 
-// console.log('addExpenses', appData.addExpenses);
 
-////////////////////////////////
 /** TODO */
 // appData.getInfoDeposit();
-// console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
 
 
 //2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с большой буквы
