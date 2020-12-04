@@ -351,8 +351,8 @@ h1 {
 
 .result div {
     width: 100%;
-    -webkit-box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35);
-    box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35);
+    -webkit-box-shadow: 2px 3px 7px rgba(0, 0, 0, .35);
+    box-shadow: 2px 3px 7px rgba(0, 0, 0, .35);
     background-color: rgba(255, 127, 99, .26);
     color: #353a43;
     padding: 15px 0 1px 20px;
