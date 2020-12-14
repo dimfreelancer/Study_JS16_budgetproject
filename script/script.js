@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Урок 8
+ * Урок 9 (8)
  * проект Budget GLO Academy
  */ 
 

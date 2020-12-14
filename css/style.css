@@ -105,7 +105,8 @@ h1 {
     height: 30px;
     text-align: center;
     line-height: 30px;
-    background-color: #ff7f63;
+    background-color: #FF8008;
+    /* background-color: #ff7f63; */
     color: #353a43;
     outline: 0;
     border: none;
@@ -116,8 +117,13 @@ h1 {
 }
 
 .data .btn_plus:hover {
-    -webkit-box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35);
-    box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35)
+    -webkit-box-shadow: 2px 3px 4px rgba(0, 0, 0, .35);
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, .35)
+}
+
+.data .btn_plus:active {
+    -webkit-box-shadow: inset 1px 1px 4px rgba(0, 0, 0, .2);
+    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, .2)
 }
 
 .data .additional_expenses-item,
@@ -171,8 +177,8 @@ h1 {
 
 .data .deposit-label:hover input~.deposit-checkmark {
     background-color: #ff7f63;
-    -webkit-box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35);
-    box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35)
+    -webkit-box-shadow:   2px 3px 7px rgba(0, 0, 0, .35);
+    box-shadow:   2px 3px 7px rgba(0, 0, 0, .35)
 }
 
 .data .deposit-label input:checked~.deposit-checkmark:after {
@@ -430,8 +436,8 @@ h1 {
 .result #start {
     width: 262px;
     height: 67px;
-    -webkit-box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35);
-    box-shadow: inset 2px 3px 7px rgba(0, 0, 0, .35);
+    -webkit-box-shadow:   2px 3px 7px rgba(0, 0, 0, .35);
+    box-shadow:   2px 3px 7px rgba(0, 0, 0, .35);
     background-color: #353a43;
     color: #fff;
     font-size: 20px;
@@ -450,7 +456,10 @@ h1 {
 
 .result #cancel:active,
 .result #start:active {
-    background-color: #ff7f63;
-    color: #fff;
+    -webkit-box-shadow:   1px 1px 3px rgba(0, 0, 0, .3);
+    box-shadow:   1px 1px 3px rgba(0, 0, 0, .3);
+    background-color: #ff8008;
+    color: #353a43;
+    /* color: #fff; */
     opacity: 1
 }
