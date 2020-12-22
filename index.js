@@ -9,6 +9,8 @@ console.log('Урок 9 получим элементы страницы');
 //  Задание по проекту, получить каждый элемент в отдельную переменную:
 
 const start = document.getElementById('start'); //+
+const cancel = document.getElementById('cancel'); //
+
 const btnPlus = document.getElementsByTagName('button'); //++
 const incomePlus = btnPlus[0];//income_add
 const expensesPlus = btnPlus[1];//expenses_add
@@ -67,18 +69,17 @@ const isNumber = function(item) {
 
 let money = '';
     
-const start = function() {
+const _start = function() {
     //функция ввода и проверки данных
         do {
             money = prompt('Введите ваш месячный доход');
         } 
         while (!isNumber(money));
 };
+_start();
 
-start();
 
-
-//объявление рабочего объекта приложения
+//объявление рабочего объекта приложения appData
 let appData = {
 
     budget: money,
@@ -121,11 +122,34 @@ let appData = {
         }
 
         let addExpenses = prompt('Перечислите возможные дополнительные расходы через запятую:');
-        appData.addExpenses = addExpenses.toLowerCase().split(', '); //сплитим и сохраняем строку в массив
-
+        appData.addExpenses = addExpenses.toLowerCase().split(','); //сплитим и сохраняем строку в массив через запятую ',' //пробелы уберем резез trim() потом
+        // appData.addExpenses = addExpenses.toLowerCase().split(', '); //сплитим и сохраняем строку в массив
+        
         /** TODO перебор массива избавимся от лишних пробелов, возможно здесь лучше использовать Map()*/
         for (let key in appData.addExpenses) {
-            appData.addExpenses[key] = appData.addExpenses[key].trim();
+
+            //входные данные 
+            let tmp = appData.addExpenses[key];
+            // console.log('tmp: ', tmp);
+            tmp = tmp.trim();
+            // console.log('tmp: trim', tmp);
+            //уберем пробелы внутри предложения между словами
+            let array = tmp.split(' ');
+
+            tmp = '';
+            console.log('array words: ',  array);
+            array.forEach( elem => {
+                if (elem !== '') {
+                    tmp += ' ' + elem;
+                };
+            });
+            tmp = tmp.trim();
+            // console.log('tmp:', tmp);
+            
+            //= appData.addExpenses[key].trim(); /// уберем пробелы в начале и в конце предложения
+            //выходные данные
+            //выгружаем туда же
+            appData.addExpenses[key] = tmp.trim();
         }
 
 
@@ -202,6 +226,9 @@ let appData = {
 };
     
 
+
+
+
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
@@ -236,8 +263,14 @@ let result = '';
 for (let key in appData.addExpenses) {
 
     let value = appData.addExpenses[key].trim();
+    result += value.slice(0, 1).toUpperCase() + value.slice(1) + ', ';
+    
+    //собираем из массива обратно в строку
+    // result += value[0].toUpperCase() + value.slice(1) + ', ';
     // result += appData.addExpenses[key][0].toUpperCase() + appData.addExpenses[key].slice(1) + ', ';
-    result += value[0].toUpperCase() + value.slice(1) + ', '
 };
+
+
 console.log('result: ', result);
+
 
