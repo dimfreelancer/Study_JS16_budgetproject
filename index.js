@@ -1,11 +1,10 @@
 'use strict';
 /**
- * Урок 9
+ * Урок 11
  * этот скрипт для работы с элементами страницы из Урока 9
- * временно пишем в этот файл потом объединим с оновным
  */
 
-console.log('Урок 9 получим элементы страницы');
+console.log('Урок 11');
 //  Задание по проекту, получить каждый элемент в отдельную переменную:
 
 const start = document.getElementById('start'); //+
@@ -21,7 +20,6 @@ console.log('additionalIncomeItems: ', additionalIncomeItems);
 const depositCheck = document.querySelector('#deposit-check');////// CC
 
 const budgetMonthValue = document.getElementsByClassName('budget_month-value')[0];// HTMLCollection[]
-console.log('budgetMonthValue: ', budgetMonthValue);
 const budgetDayValue = document.getElementsByClassName('budget_day-value')[0];//
 const expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0];//
 
@@ -69,14 +67,13 @@ const isNumber = function(item) {
 
 let money = '';
     
-const _start = function() {
-    //функция ввода и проверки данных
-        do {
-            money = prompt('Введите ваш месячный доход');
-        } 
-        while (!isNumber(money));
-};
-_start();
+// const _start = function() {
+//     //функция ввода и проверки данных
+//         do {
+//             money = prompt('Введите ваш месячный доход');
+//         } 
+//         while (!isNumber(money));
+// };
 
 
 //объявление рабочего объекта приложения appData
@@ -99,6 +96,18 @@ let appData = {
 
     mission: 50000,
     period: 3,
+    _start: function() {
+        //функция ввода и проверки данных после нажатия на кнопку расчитать
+        do {
+            //проверка на корректность данных
+            money = prompt('Введите ваш месячный доход');
+        } 
+        while (!isNumber(money));
+
+        appData.asking();
+        appData.getExpensesMonth();
+        appData.getBudget();
+    },    
     asking: function() {
         //функция опроса пользователя
 
@@ -225,13 +234,11 @@ let appData = {
     }
 };
     
+//повесим обработчики на кнопки
+start.addEventListener('click', appData._start);
 
 
 
-
-appData.asking();
-appData.getExpensesMonth();
-appData.getBudget();
 
 ///Расходы за месяц
 console.log('Расходы за месяц', appData.expensesMonth);
@@ -249,28 +256,26 @@ console.log(appData.getStatusIncome());
 
 //вывести в консоль весь объект
 /** TODO */
-for (let key in appData) {
-    console.log(`Наша программа включает в себя дарнные: ${key} = ${appData[key]}`);
-}
+// for (let key in appData) {
+//     console.log(`Наша программа включает в себя дарнные: ${key} = ${appData[key]}`);
+// }
 
 
-/** TODO */
-appData.getInfoDeposit();
+// /** TODO */
+// appData.getInfoDeposit();
+// //2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с большой буквы
+// // слова разделены запятой и пробелом
+// let result = '';
+// for (let key in appData.addExpenses) {
 
-//2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с большой буквы
-// слова разделены запятой и пробелом
-let result = '';
-for (let key in appData.addExpenses) {
-
-    let value = appData.addExpenses[key].trim();
-    result += value.slice(0, 1).toUpperCase() + value.slice(1) + ', ';
-    
-    //собираем из массива обратно в строку
-    // result += value[0].toUpperCase() + value.slice(1) + ', ';
-    // result += appData.addExpenses[key][0].toUpperCase() + appData.addExpenses[key].slice(1) + ', ';
-};
+// //собираем из массива обратно в строку
+// let value = appData.addExpenses[key].trim();
+// result += value.slice(0, 1).toUpperCase() + value.slice(1) + ', ';
+// // result += value[0].toUpperCase() + value.slice(1) + ', ';
+// // result += appData.addExpenses[key][0].toUpperCase() + appData.addExpenses[key].slice(1) + ', ';
+// };
 
 
-console.log('result: ', result);
+// console.log('result: ', result);
 
 
