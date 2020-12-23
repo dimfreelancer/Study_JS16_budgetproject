@@ -45,6 +45,7 @@ const expensesAmount = document.querySelector('.expenses-amount');////
 
 const additionalExpenses = document.querySelector('.additional_expenses');//?
 const periodSelect = document.querySelector('.period-select'); //range
+const periodAmount = document.querySelector('.period-amount'); //range
 
 
 
@@ -100,14 +101,28 @@ let appData = {
         //функция ввода и проверки данных после нажатия на кнопку расчитать
         do {
             //проверка на корректность данных
+            //TODO убрать проверку пустого поля в отдельный медод
             money = prompt('Введите ваш месячный доход');
         } 
         while (!isNumber(money));
 
-        appData.asking();
-        appData.getExpensesMonth();
-        appData.getBudget();
-    },    
+        // appData.asking();
+        // appData.getExpensesMonth();
+        // appData.getBudget();
+    },
+    getIncome: function() {
+        console.log('get Income');
+    },
+    getExpenses: function() {
+        console.log('get expenses');
+    },
+    getIncomeBlock: function() {
+        console.log('get IncomeBlock');
+    },
+    getExpensesBlock: function() {
+        console.log('get expensesBlock');
+    },
+
     asking: function() {
         //функция опроса пользователя
 
@@ -237,7 +252,16 @@ let appData = {
 //повесим обработчики на кнопки
 start.addEventListener('click', appData._start);
 
+periodSelect.addEventListener('input', function() {
 
+    let period = periodSelect.value;
+    console.log('periodSelect.value: ', period);
+
+    console.log('period range was input'+
+                    'поменяем здесь вывод цфр');
+
+    periodAmount.textContent = period;
+});
 
 
 ///Расходы за месяц
