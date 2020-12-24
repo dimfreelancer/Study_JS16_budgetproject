@@ -67,15 +67,6 @@ const isNumber = function(item) {
 };
 
 let money = '';
-    
-// const _start = function() {
-//     //функция ввода и проверки данных
-//         do {
-//             money = prompt('Введите ваш месячный доход');
-//         } 
-//         while (!isNumber(money));
-// };
-
 
 //объявление рабочего объекта приложения appData
 let appData = {
@@ -109,6 +100,8 @@ let appData = {
         // appData.asking();
         // appData.getExpensesMonth();
         // appData.getBudget();
+
+        cancel.style.display = 'block';
     },
     getIncome: function() {
         console.log('get Income');
@@ -122,6 +115,14 @@ let appData = {
     getExpensesBlock: function() {
         console.log('get expensesBlock');
     },
+
+    addIncomeBlock: function() {
+        console.log('добавить блок дополнительных доходов');
+
+        
+
+    },
+
 
     asking: function() {
         //функция опроса пользователя
@@ -200,7 +201,6 @@ let appData = {
             // appData.expenses[key] = value; //сохраняем в объект
             appData.expenses[itemExpenses] = cashExpenses;
         };
-        
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
     },
     getExpensesMonth: function () {
@@ -251,6 +251,9 @@ let appData = {
     
 //повесим обработчики на кнопки
 start.addEventListener('click', appData._start);
+
+//кнопка плюс добавить .additional_income
+incomePlus.addEventListener('click', aoeu );
 
 periodSelect.addEventListener('input', function() {
 
