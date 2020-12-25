@@ -35,7 +35,6 @@ const targetMonthValue = document.getElementsByClassName('target_month-value')[0
 
 
 
-
 const salaryAmount = document.querySelector('.salary-amount');////
 const incomeTitle = document.querySelector('.income-title');////
 const incomeAmount = document.querySelector('.income-amount');////
@@ -71,7 +70,7 @@ let money = '';
 //объявление рабочего объекта приложения appData
 let appData = {
 
-    budget: money,
+    budget: 0,
     budgetDay: 0,
     budgetMonth: 0,
 
@@ -90,17 +89,27 @@ let appData = {
     period: 3,
     _start: function() {
         //функция ввода и проверки данных после нажатия на кнопку расчитать
-        do {
-            //проверка на корректность данных
-            //TODO убрать проверку пустого поля в отдельный медод
-            money = prompt('Введите ваш месячный доход');
-        } 
-        while (!isNumber(money));
+        // do {
+        //     //проверка на корректность данных
+        //     //TODO убрать проверку пустого поля в отдельный медод
+        //     money = prompt('Введите ваш месячный доход');
+        // } 
+        // while (!isNumber(money));
+
+        //сохраняем поле Месячный доход в переменную
+        if (salaryAmount.value.trim() === '') {
+            alert('Поле Месячный доход должно быть заполнено');
+        };
+
+        appData.budget = salaryAmount.value;
+        console.log('appData.budget: ', appData.budget);
 
         // appData.asking();
         // appData.getExpensesMonth();
         // appData.getBudget();
 
+
+        //показать кнопку
         cancel.style.display = 'block';
     },
     getIncome: function() {
