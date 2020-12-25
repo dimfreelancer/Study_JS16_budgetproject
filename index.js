@@ -14,6 +14,10 @@ const btnPlus = document.getElementsByTagName('button'); //++
 const incomePlus = btnPlus[0];//income_add
 const expensesPlus = btnPlus[1];//expenses_add
 
+//дополнительные блоки
+// const incomeItems = document.querySelector('.income-items');
+// const expensesItems = document.querySelector('.expenses-items');
+
 const additionalIncomeItems = document.querySelectorAll('.additional_income-item');// NodeList => []
 console.log('additionalIncomeItems: ', additionalIncomeItems);
 
@@ -31,10 +35,6 @@ const additionalExpensesValue = document.getElementsByClassName('additional_expe
 const incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
 const targetMonthValue = document.getElementsByClassName('target_month-value')[0];
 
-
-
-
-
 const salaryAmount = document.querySelector('.salary-amount');////
 const incomeTitle = document.querySelector('.income-title');////
 const incomeAmount = document.querySelector('.income-amount');////
@@ -46,20 +46,10 @@ const additionalExpenses = document.querySelector('.additional_expenses');//?
 const periodSelect = document.querySelector('.period-select'); //range
 const periodAmount = document.querySelector('.period-amount'); //range
 
-
-
 const buttonIncomeAdd = document.querySelector('.income_add');//
 const buttonExpensesAdd = document.querySelector('.expenses_add');//
 
 
-
-/*** */
-
-
-/**
- * Урок 9
- * проект Budget GLO Academy
- */ 
 
 const isNumber = function(item) {
     return (!isNaN(parseFloat(item)) && isFinite(item));
@@ -89,18 +79,13 @@ let appData = {
     period: 3,
     _start: function() {
         //функция ввода и проверки данных после нажатия на кнопку расчитать
-        // do {
-        //     //проверка на корректность данных
-        //     //TODO убрать проверку пустого поля в отдельный медод
-        //     money = prompt('Введите ваш месячный доход');
-        // } 
-        // while (!isNumber(money));
-
         //сохраняем поле Месячный доход в переменную
         if (salaryAmount.value.trim() === '') {
             alert('Поле Месячный доход должно быть заполнено');
-        };
 
+            //завершить функцию -> по сути переход на следующий клик
+            return;
+        };
         appData.budget = salaryAmount.value;
         console.log('appData.budget: ', appData.budget);
 
@@ -124,15 +109,25 @@ let appData = {
     getExpensesBlock: function() {
         console.log('get expensesBlock');
     },
-
     addIncomeBlock: function() {
         console.log('добавить блок дополнительных доходов');
-
-        
-
+        console.log(incomeItems);
+        incomeItems.after(incomeItems.cloneNode(true));
     },
+    addExpensesBlock: function() {
+        console.log('добавить блок дополнительных расходов');
+        const expensesItem = document.querySelector('.expenses-items')
+        console.log('expensesItems: ', expensesItem);
+        console.log('expensesItems.parentNode: ', expensesItem.parentNode);
 
+        let cloneExpensesItem = expensesItem.cloneNode(true);//клонируем
+        
+        expensesItem.querySelector('.expenses-title').value='';
+        expensesItem.querySelector('.expenses-amount').value='0';
+        expensesItem.parentNode.insertBefore(cloneExpensesItem, expensesPlus);
 
+        //ограничим колличество до трех штук!!!
+    },
     asking: function() {
         //функция опроса пользователя
 
@@ -143,13 +138,11 @@ let appData = {
             let itemIncome, cashIncome;
             do {
                 itemIncome = prompt('Какой у вас есть дополнительный заработок', 'Таксист'); //key string
-                // console.log('debug itemIncome: ', itemIncome);
             }
             while(!isNaN(itemIncome)); //такая проверка на правильность ввода строки здесь работет
 
             do {
                 cashIncome = prompt('Сколько в месяц вы зарабатываете на этом', 10000); //value number
-                // console.log('debug cashIncome: ', cashIncome);
             }
             while(!isNumber(cashIncome));
             appData.income[itemIncome] = cashIncome;
@@ -161,12 +154,9 @@ let appData = {
         
         /** TODO перебор массива избавимся от лишних пробелов, возможно здесь лучше использовать Map()*/
         for (let key in appData.addExpenses) {
-
             //входные данные 
             let tmp = appData.addExpenses[key];
-            // console.log('tmp: ', tmp);
             tmp = tmp.trim();
-            // console.log('tmp: trim', tmp);
             //уберем пробелы внутри предложения между словами
             let array = tmp.split(' ');
 
@@ -178,11 +168,6 @@ let appData = {
                 };
             });
             tmp = tmp.trim();
-            // console.log('tmp:', tmp);
-            
-            //= appData.addExpenses[key].trim(); /// уберем пробелы в начале и в конце предложения
-            //выходные данные
-            //выгружаем туда же
             appData.addExpenses[key] = tmp.trim();
         }
 
@@ -262,7 +247,9 @@ let appData = {
 start.addEventListener('click', appData._start);
 
 //кнопка плюс добавить .additional_income
-incomePlus.addEventListener('click', aoeu );
+incomePlus.addEventListener('click', appData.addIncomeBlock );
+//кнопка плюс добавить .additional_expenses
+expensesPlus.addEventListener('click', appData.addExpensesBlock );
 
 periodSelect.addEventListener('input', function() {
 
